@@ -9,10 +9,25 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>ShoppingTests.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>BBA6F9081B270525006642BC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>BBA6F9161B27055E006642BC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>BBA6F9451B2716C4006642BC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
