@@ -19,14 +19,14 @@ class F_TriggerTests: XCTestCase {
     // MARK: Simple Trigger Offer
     func waterApplies(){
         let offer = FreeWaterWithNewspaperOffer()
-        XCTAssertFalse(offer.appliesTo([P.smokedBacon]))
-        XCTAssertFalse(offer.appliesTo([P.smokedBacon, P.smokedBacon])) //2 bacon
-        XCTAssertFalse(offer.appliesTo([P.💧]))
-        XCTAssertFalse(offer.appliesTo([P.💧,P.💧]))
-        XCTAssertFalse(offer.appliesTo([P.📰]))
-        XCTAssertFalse(offer.appliesTo([P.📰,P.📰]))
-        XCTAssertTrue(offer.appliesTo([P.📰,P.💧]))
-        XCTAssertTrue(offer.appliesTo([P.💧,P.📰]))
+        XCTAssertFalse(offer.applies(to: [P.smokedBacon]))
+        XCTAssertFalse(offer.applies(to: [P.smokedBacon, P.smokedBacon])) //2 bacon
+        XCTAssertFalse(offer.applies(to: [P.💧]))
+        XCTAssertFalse(offer.applies(to: [P.💧,P.💧]))
+        XCTAssertFalse(offer.applies(to: [P.📰]))
+        XCTAssertFalse(offer.applies(to: [P.📰,P.📰]))
+        XCTAssertTrue(offer.applies(to: [P.📰,P.💧]))
+        XCTAssertTrue(offer.applies(to: [P.💧,P.📰]))
     }
     
     
@@ -34,34 +34,41 @@ class F_TriggerTests: XCTestCase {
         waterApplies()
     }
     
+    func testPriceChange(){
+        waterApplies()
+        let water = P.💧
+        let waterOriginalPrice = water.price
+        water.price = 200
+        let list = [water,P.📰]
+        XCTAssertEqual(offer.discount(for:list), 200, "offer works with change in water price")
+        water.price = waterOriginalPrice //needs to be put back as will persist for other tests
+    }
+    
     
     func testTwoWaterWithOnePaper(){
         waterApplies()
         let list = [P.💧,P.📰,P.💧]
-        XCTAssertEqual(offer.discountFrom(list) ,P.💧.priceInPence * 1, "1 x water correctly discounted")
+        XCTAssertEqual(offer.discount(for:list) ,P.💧.price * 1, "1 x water correctly discounted")
     }
     
     func testMoreWatersThanPapers(){
         waterApplies()
         var list = [P.📰,P.📰,P.💧,P.💧,P.💧]
-        XCTAssertEqual(offer.discountFrom(list),P.💧.priceInPence * 2, "2 x water correctly discounted")
+        XCTAssertEqual(offer.discount(for:list),P.💧.price * 2, "2 x water correctly discounted")
         list = [P.📰,P.📰,P.📰,P.💧,P.💧,P.💧,P.💧,P.💧,P.💧]
-        XCTAssertEqual(offer.discountFrom(list),P.💧.priceInPence * 3, "3 x water correctly discounted")
+        XCTAssertEqual(offer.discount(for:list),P.💧.price * 3, "3 x water correctly discounted")
     }
     
     func testMorePapersThanWaters(){
         waterApplies()
         var list =  [P.📰,P.📰,P.📰,P.💧,P.💧]
-        XCTAssertEqual(offer.discountFrom(list),P.💧.priceInPence * 2, "2 x water correctly discounted")
+        XCTAssertEqual(offer.discount(for:list),P.💧.price * 2, "2 x water correctly discounted")
         
         list = [P.📰,P.📰,P.📰,P.📰,P.📰,P.📰,P.📰,P.💧]
-        XCTAssertEqual(offer.discountFrom(list),P.💧.priceInPence, "2 x water correctly discounted")
+        XCTAssertEqual(offer.discount(for:list),P.💧.price, "2 x water correctly discounted")
     }
     
-    func testWaterAppliesFasterThanDiscount(){
-        let testProducts = [P.📰,P.📰,P.📰,P.📰,P.📰,P.📰,P.📰,P.💧]
-        XCTAssertTrue(Helper.shared.offer(offer, hasFasterAppliesMethodWith: testProducts), "B2G3F 'appliesTo' method should be quicker than its 'discountFrom' method")
-    }
+
 }
 
 
@@ -86,15 +93,15 @@ class G_TriggerFurtherTests: XCTestCase {
 
     func softenerApplies(){
         let justDetergents = [P.persil, P.ariel]
-        XCTAssertFalse(FreeSoftenerWithDetergentOffer().appliesTo(justDetergents), "Offer not valid only on detergents")
+        XCTAssertFalse(FreeSoftenerWithDetergentOffer().applies(to: justDetergents), "Offer not valid only on detergents")
         
         let justSofteners = [P.comfortSoftener,P.genericSoftener]
-        XCTAssertFalse(FreeSoftenerWithDetergentOffer().appliesTo(justSofteners), "Offer not valid only on softeners")
+        XCTAssertFalse(FreeSoftenerWithDetergentOffer().applies(to: justSofteners), "Offer not valid only on softeners")
         
         let detergentAndSoftener = [P.ariel, P.comfortSoftener]
-        XCTAssertTrue(FreeSoftenerWithDetergentOffer().appliesTo(detergentAndSoftener), "Offer valid only on detergent and softener")
+        XCTAssertTrue(FreeSoftenerWithDetergentOffer().applies(to: detergentAndSoftener), "Offer valid only on detergent and softener")
         
-        XCTAssertTrue(FreeSoftenerWithDetergentOffer().appliesTo(detergentAndSoftener.reversed()), "Offer valid only on softener and detergent")
+        XCTAssertTrue(FreeSoftenerWithDetergentOffer().applies(to: detergentAndSoftener.reversed()), "Offer valid only on softener and detergent")
     }
     
     func testSoftenerApplicabilityOnlyOneProductType(){
@@ -105,39 +112,36 @@ class G_TriggerFurtherTests: XCTestCase {
     func testCheapSoftenerDetergentDiscount(){
         softenerApplies()
         let list = [P.persil, P.comfortSoftener, P.genericSoftener]
-        XCTAssertEqual(offer.discountFrom(list), 429, "Softener Discount - one of each");
+        XCTAssertEqual(offer.discount(for:list), 429, "Softener Discount - one of each");
     }
     
     func testSoftenerDetergentDiscount(){
         softenerApplies()
         var list =  [P.persil, P.ariel, P.comfortSoftener, P.genericSoftener]
-        XCTAssertEqual(offer.discountFrom(list), 828, "Softener Discount - one of each");
+        XCTAssertEqual(offer.discount(for:list), 828, "Softener Discount - one of each");
         
         //extra detergent
         list.append(P.persil)
-        XCTAssertEqual(offer.discountFrom(list), 828, "Softener Discount - one more detergent");
+        XCTAssertEqual(offer.discount(for:list), 828, "Softener Discount - one more detergent");
         
         list.append(contentsOf: [P.ariel, P.comfortSoftener, P.genericSoftener])
-        XCTAssertEqual(offer.discountFrom(list), 1656, "Softener Discount - two of each plus");
+        XCTAssertEqual(offer.discount(for:list), 1656, "Softener Discount - two of each plus");
         
         list.append(P.comfortSoftener)
-        XCTAssertEqual(offer.discountFrom(list), 1686, "Softener Discount - two of each plus one extra comfort");
+        XCTAssertEqual(offer.discount(for:list), 1686, "Softener Discount - two of each plus one extra comfort");
         
         list = [P.premiumSoftener, P.genericSoftener, P.ariel]
-        XCTAssertEqual(offer.discountFrom(list), 1200, "Softener Discount - more expensive softener");
+        XCTAssertEqual(offer.discount(for:list), 1200, "Softener Discount - more expensive softener");
         
     }
     
     func testSoftenerDetergentDiscountOneQualifyingProduct(){
         softenerApplies()
         let list = [P.persil, P.genericSoftener, P.comfortSoftener]
-        XCTAssertEqual(offer.discountFrom(list), 429, "Softner discount with one qualifying product");
+        XCTAssertEqual(offer.discount(for:list), 429, "Softner discount with one qualifying product");
 
     }
     
-    func testSoftenerAppliesFasterThanDiscount(){
-        let testProducts = [P.ariel, P.comfortSoftener, P.genericSoftener]
-        XCTAssertTrue(Helper.shared.offer(offer, hasFasterAppliesMethodWith: testProducts), "B2G3F 'appliesTo' method should be quicker than its 'discountFrom' method")
-    }
+
 
 }

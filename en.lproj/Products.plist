@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>Name</key>
+		<string>Bread</string>
+		<key>Price</key>
+		<integer>100</integer>
+		<key>ProdId</key>
+		<integer>134</integer>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>1 pint Milk</string>
+		<key>Price</key>
+		<integer>45</integer>
+		<key>ProdId</key>
+		<integer>137</integer>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>2 pint Milk</string>
+		<key>Price</key>
+		<integer>89</integer>
+		<key>ProdId</key>
+		<integer>138</integer>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>1.75l Coca-Cola</string>
+		<key>Price</key>
+		<integer>200</integer>
+		<key>ProdId</key>
+		<integer>401</integer>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>2l Diet Coke</string>
+		<key>Price</key>
+		<integer>200</integer>
+		<key>ProdId</key>
+		<integer>402</integer>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Smoked Bacon 6 pack</string>
+		<key>Price</key>
+		<integer>400</integer>
+		<key>ProdId</key>
+		<integer>301</integer>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Unsmoked Bacon 6 pack</string>
+		<key>Price</key>
+		<integer>400</integer>
+		<key>ProdId</key>
+		<integer>302</integer>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Sauvignon Blanc 75cl</string>
+		<key>Price</key>
+		<integer>499</integer>
+		<key>ProdId</key>
+		<integer>901</integer>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Cabernet Sauvinon 75cl</string>
+		<key>Price</key>
+		<integer>299</integer>
+		<key>ProdId</key>
+		<integer>902</integer>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Chicken Breasts 400g</string>
+		<key>Price</key>
+		<integer>450</integer>
+		<key>ProdId</key>
+		<integer>303</integer>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Lean Beef Mince 300g</string>
+		<key>Price</key>
+		<integer>500</integer>
+		<key>ProdId</key>
+		<integer>304</integer>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Pork Chops 750g</string>
+		<key>Price</key>
+		<integer>350</integer>
+		<key>ProdId</key>
+		<integer>305</integer>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Times Newspaper</string>
+		<key>Price</key>
+		<integer>120</integer>
+		<key>ProdId</key>
+		<integer>565</integer>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Evian Mineral Water 500ml</string>
+		<key>Price</key>
+		<integer>129</integer>
+		<key>ProdId</key>
+		<integer>410</integer>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Lynx Africa</string>
+		<key>Price</key>
+		<integer>319</integer>
+		<key>ProdId</key>
+		<integer>65</integer>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Dove deodorant</string>
+		<key>Price</key>
+		<integer>219</integer>
+		<key>ProdId</key>
+		<integer>66</integer>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Persil Non-Bio Powder 5kg</string>
+		<key>Price</key>
+		<integer>999</integer>
+		<key>ProdId</key>
+		<integer>617</integer>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Ariel Bio Tablets 24pack</string>
+		<key>Price</key>
+		<integer>699</integer>
+		<key>ProdId</key>
+		<integer>618</integer>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Comfort Fabric Conditioner</string>
+		<key>Price</key>
+		<integer>429</integer>
+		<key>ProdId</key>
+		<integer>619</integer>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Generic Fabric Softener</string>
+		<key>Price</key>
+		<integer>399</integer>
+		<key>ProdId</key>
+		<integer>620</integer>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>500ml Coke Zero</string>
+		<key>Price</key>
+		<integer>120</integer>
+		<key>ProdId</key>
+		<integer>403</integer>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Chicken Drumsticks</string>
+		<key>Price</key>
+		<integer>299</integer>
+		<key>ProdId</key>
+		<integer>306</integer>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Chocolate Pudding</string>
+		<key>Price</key>
+		<integer>399</integer>
+		<key>ProdId</key>
+		<integer>1001</integer>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Tiramisu</string>
+		<key>Price</key>
+		<integer>499</integer>
+		<key>ProdId</key>
+		<integer>1002</integer>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Profiteroles</string>
+		<key>Price</key>
+		<integer>299</integer>
+		<key>ProdId</key>
+		<integer>1003</integer>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Garlic Bread</string>
+		<key>Price</key>
+		<integer>400</integer>
+		<key>ProdId</key>
+		<real>1011</real>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Mushrooms</string>
+		<key>Price</key>
+		<integer>300</integer>
+		<key>ProdId</key>
+		<integer>1012</integer>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Premium Softener</string>
+		<key>Price</key>
+		<integer>1200</integer>
+		<key>ProdId</key>
+		<integer>621</integer>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Pepperoni Pizze</string>
+		<key>Price</key>
+		<integer>1849</integer>
+		<key>ProdId</key>
+		<integer>2001</integer>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Meat Feast Pizza</string>
+		<key>Price</key>
+		<integer>1849</integer>
+		<key>ProdId</key>
+		<integer>2002</integer>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Potato Wedges</string>
+		<key>Price</key>
+		<integer>399</integer>
+		<key>ProdId</key>
+		<integer>2003</integer>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Veggie Pizza</string>
+		<key>Price</key>
+		<integer>1799</integer>
+		<key>ProdId</key>
+		<integer>2004</integer>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Flat Garlic Bread</string>
+		<key>Price</key>
+		<integer>399</integer>
+		<key>ProdId</key>
+		<integer>2005</integer>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Dough balls</string>
+		<key>Price</key>
+		<integer>499</integer>
+		<key>ProdId</key>
+		<integer>2006</integer>
+	</dict>
+	<dict>
+		<key>Name</key>
+		<string>Cookies</string>
+		<key>Price</key>
+		<integer>349</integer>
+		<key>ProdId</key>
+		<integer>2007</integer>
+	</dict>
+</array>
+</plist>

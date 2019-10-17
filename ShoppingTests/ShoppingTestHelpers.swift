@@ -19,7 +19,7 @@ class Helper{
             let price = dict["Price"] as! Int
             let prodId = dict["ProdId"] as! Int
             
-            let item = Product(name: name , price: price, productId: prodId)
+            let item = Product(name, price: price, id: prodId)
             products.insert(item)
         }
     }
@@ -32,9 +32,9 @@ class Helper{
     
     func offer(_ offer: Offer, hasFasterAppliesMethodWith products: [Product]) -> Bool {
         return closure({
-            _ = offer.appliesTo(products)
+            _ = offer.applies(to: products)
         }, isFasterThan: {
-            _ = offer.discountFrom(products)
+            _ = offer.discount(for:products)
         })
     }
     
@@ -44,7 +44,7 @@ class Helper{
     
     private func timeExecution(_ closure: () -> Void) -> TimeInterval {
         let startTime = Date()
-        for _ in 1...100000 {
+        for _ in 1...10000 {
             closure()
         }
         return Date().timeIntervalSince(startTime)
@@ -54,12 +54,20 @@ class Helper{
 
 class P {
     //drinks
-    static let coke = Helper.shared.productById(401)!
-    static let dietcoke = Helper.shared.productById(402)!
-    static let cokezero = Helper.shared.productById(403)!
-    static let 🍾 = Helper.shared.productById(901)!
-    static let 🍷 = Helper.shared.productById(902)!
-    static let 💧 = Helper.shared.productById(410)!
+   // static let coke = Helper.shared.productById(401)!
+    //static let dietcoke = Helper.shared.productById(402)!
+    //static let cokezero = Helper.shared.productById(403)!
+    //static let 🍾 = Helper.shared.productById(901)!
+//    static let 🍷 = Helper.shared.productById(902)!
+    //    static let 💧 = Helper.shared.productById(410)!
+    
+    static let coke = Product("1.75l Coca-Cola",price: 200,id: 401)
+    static let dietcoke = Product("2l Diet Coke",price: 200,id: 402)
+    static let cokezero = Product("500ml Coke Zero", price: 120, id: 403)
+    static let 🍾 = Product("Sauvignon Blanc 75cl", price: 499, id: 901)
+    static let 🍷 = Product("Cabernet Sauvinon 75cl", price: 299, id: 902)
+    static let 💧 = Product("Evian Mineral Water 500ml",price: 129,id: 410)
+    
     static let milk = Helper.shared.productById(137)!
     
     //meats

@@ -16,54 +16,59 @@ class E_CappedTests: XCTestCase {
         super.tearDown()
     }
 
-    func threeMeatsApplies(){
+    func applies(){
         let offer = ThreeMeatsForTenPoundOffer()
-        XCTAssertFalse(offer.appliesTo([P.📰,P.📰,P.📰]))
-        XCTAssertFalse(offer.appliesTo([P.mince,P.📰,P.mince]))
-        XCTAssertTrue(offer.appliesTo([P.mince,P.mince,P.mince])) // 3 x beef mince (£15)
-        XCTAssertFalse(offer.appliesTo([P.🍗,P.🍗,P.🍗,P.🍗,P.🍗,P.🍗,P.🍗]),"Valid products but not expensive enough to trigger offer")
+        XCTAssertFalse(offer.applies(to: [P.📰,P.📰,P.📰]))
+        XCTAssertFalse(offer.applies(to: [P.mince,P.📰,P.mince]))
+        XCTAssertTrue(offer.applies(to: [P.mince,P.mince,P.mince])) // 3 x beef mince (£15)
+        XCTAssertTrue(offer.applies(to: [P.porkChops, P.porkChops,P.🍗,P.porkChops, P.porkChops, P.🍗]))
+        XCTAssertFalse(offer.applies(to: [P.🍗,P.🍗,P.🍗,P.🍗,P.🍗,P.🍗,P.🍗]),"Valid products but not expensive enough to trigger offer")
     }
     
-    func testThreeMeatsApplicable(){
-        threeMeatsApplies()
+    func testApplicable(){
+        applies()
     }
     
-    func testThreeMeatForTenPoundsFiveItems(){
-        threeMeatsApplies()
+    func testFiveItems(){
+        applies()
         var list = [P.smokedBacon,P.unsmokedBacon,P.chicken,P.mince,P.porkChops] //  400p, 400p, 450p, 500p, 350p
-        XCTAssertEqual(offer.discountFrom(list), 350, "Meat discount calculated correctly with 5 items")
+        XCTAssertEqual(offer.discount(for:list), 350, "Meat discount calculated correctly with 5 items")
         list = [P.smokedBacon,P.unsmokedBacon,P.🍗]
-        XCTAssertEqual(offer.discountFrom(list),99, "3 items over £10, last under £3.33")
+        XCTAssertEqual(offer.discount(for:list),99, "3 items over £10, last under £3.33")
     }
     
-    func testThreeMeatForTenPoundsCheapItems(){
-        threeMeatsApplies()
+    func testCheapItems(){
+        applies()
         var list = [P.🍗,P.🍗,P.🍗] //299,299,299
-        XCTAssertEqual(offer.discountFrom(list), 0, "No discount / increase in price with low price meat")
+        XCTAssertEqual(offer.discount(for:list), 0, "No discount / increase in price with low price meat")
         list = ([P.🍗,P.🍗,P.🍗,P.🍗,P.🍗,P.🍗,P.🍗,P.🍗,P.🍗,P.🍗]) //299 x many
-        XCTAssertEqual(offer.discountFrom(list), 0, "No discount / increase in price with lots of cheap meat")
+        XCTAssertEqual(offer.discount(for:list), 0, "No discount / increase in price with lots of cheap meat")
         list.append(contentsOf: [P.unsmokedBacon, P.smokedBacon, P.chicken]) //400, 400, 450
-        XCTAssertEqual(offer.discountFrom(list), 250, "Discount with second set of meat")
+        XCTAssertEqual(offer.discount(for:list), 250, "Discount with second set of meat")
     }
     
-    func testThreeMeatForTenPoundsManyItems(){
-        threeMeatsApplies()
+    func testManyItems(){
+        applies()
         var list = [Product]()
         for _ in 1...100{
             list.append(P.smokedBacon) //Smoked Bacon 6 pack   400p
             list.append(P.unsmokedBacon) //Unsmoked Bacon 6 pack 400p
             list.append(P.chicken) //Chicken Breasts 400g  450p
         }
-        XCTAssertEqual(offer.discountFrom(list),25000, "Meat discount calculated correctly with 300 items")
+        XCTAssertEqual(offer.discount(for:list),25000, "Meat discount calculated correctly with 300 items")
         
         list.append(P.chicken) //Chicken Breasts 400g  450p
-        XCTAssertEqual(offer.discountFrom(list),25050, "Meat discount calculated correctly with 301 items")
+        XCTAssertEqual(offer.discount(for:list),25050, "Meat discount calculated correctly with 301 items")
     }
     
-    func testBuyTwoGetThirdFreeAppliesFasterThanDiscount(){
-        let testProducts = [P.smokedBacon,P.unsmokedBacon,P.chicken,P.mince,P.porkChops, P.chocPudding]
-        XCTAssertTrue(Helper.shared.offer(offer, hasFasterAppliesMethodWith: testProducts), "B2G3F 'appliesTo' method should be quicker than its 'discountFrom' method")
+    func testMixCheapAndExpensive(){
+        XCTAssertEqual(offer.discount(for:[P.🍗,P.🍗,P.🍗,P.mince,P.mince,P.mince]),500,"Should apply to mince")
+        
+        XCTAssertEqual(offer.discount(for:[P.🍗,P.mince,P.🍗,P.🍗,P.mince,P.🍗]),299,"Should apply to 2 mince and 1 chicken")
+        XCTAssertEqual(offer.discount(for:[P.porkChops, P.porkChops,P.🍗,P.porkChops, P.porkChops, P.🍗]),50)
     }
+    
+
     
 
 }

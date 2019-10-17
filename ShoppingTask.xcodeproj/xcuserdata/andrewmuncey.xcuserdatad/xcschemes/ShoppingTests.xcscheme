@@ -9,14 +9,14 @@
          <BuildActionEntry
             buildForTesting = "YES"
             buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BBA6F9081B270525006642BC"
-               BuildableName = "ShoppingTask"
-               BlueprintName = "ShoppingTask"
+               BlueprintIdentifier = "BBA6F9451B2716C4006642BC"
+               BuildableName = "ShoppingTests.xctest"
+               BlueprintName = "ShoppingTests"
                ReferencedContainer = "container:ShoppingTask.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -42,9 +42,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "BBA6F9081B270525006642BC"
-            BuildableName = "ShoppingTask"
-            BlueprintName = "ShoppingTask"
+            BlueprintIdentifier = "BBA6F9451B2716C4006642BC"
+            BuildableName = "ShoppingTests.xctest"
+            BlueprintName = "ShoppingTests"
             ReferencedContainer = "container:ShoppingTask.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -61,16 +61,15 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "BBA6F9081B270525006642BC"
-            BuildableName = "ShoppingTask"
-            BlueprintName = "ShoppingTask"
+            BlueprintIdentifier = "BBA6F9451B2716C4006642BC"
+            BuildableName = "ShoppingTests.xctest"
+            BlueprintName = "ShoppingTests"
             ReferencedContainer = "container:ShoppingTask.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -80,16 +79,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "BBA6F9081B270525006642BC"
-            BuildableName = "ShoppingTask"
-            BlueprintName = "ShoppingTask"
+            BlueprintIdentifier = "BBA6F9451B2716C4006642BC"
+            BuildableName = "ShoppingTests.xctest"
+            BlueprintName = "ShoppingTests"
             ReferencedContainer = "container:ShoppingTask.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

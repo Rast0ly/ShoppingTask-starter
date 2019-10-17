@@ -2,36 +2,32 @@ import XCTest
 
 class I_ComplexSelectionTests: XCTestCase {
     
-    var offer : GenericComplexSelectionOffer!
+    var offer : WinterWarmerOffer!
     
     override func setUp() {
         super.setUp()
-        
-        let pizzas = [P.meatPizza, P.veggiePizza, P.pepperoniPizza]
-        let sides = [P.doughBalls, P.potatoWedges]
-        let garlicBreads = [P.flatGarlicBread, P.garlicBread]
-        let desserts = [P.cookies]
-        
-        let pizzaRule = (items: Set(pizzas.map({$0.id})), quantity: 2)
-        let sidesRule = (items: Set(sides.map({$0.id})), quantity: 2)
-        let garlicBreadRule = (items: Set(garlicBreads.map({$0.id})), quantity: 1)
-        let dessertRule = (items: Set(desserts.map({$0.id})), quantity: 1)
-        
-        offer = GenericComplexSelectionOffer(name: "Winter Warmer", productIdGroupsAndQuantities: [pizzaRule, sidesRule, garlicBreadRule, dessertRule], maxPrice: 2099)
+        offer = WinterWarmerOffer()
     }
     
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
         offer = nil
         super.tearDown()
     }
     
     func offerApplies(){
+        
+        let notEnoughPizzas = [P.meatPizza, P.cookies, P.doughBalls, P.doughBalls, P.garlicBread]
+        XCTAssertFalse(offer.applies(to: notEnoughPizzas))
+        
         var items = [P.meatPizza, P.veggiePizza, P.doughBalls, P.doughBalls, P.garlicBread]
-        XCTAssertFalse(offer.appliesTo(items))
+        XCTAssertFalse(offer.applies(to: items))
         
         items.append(P.cookies)
-        XCTAssertTrue(offer.appliesTo(items))
+        XCTAssertTrue(offer.applies(to: items))
+        
+        items.append(contentsOf: [P.meatPizza, P.veggiePizza, P.doughBalls, P.doughBalls, P.garlicBread, P.cookies])
+        
+        XCTAssertTrue(offer.applies(to: items))
     }
     
     func testOfferApplies() {
@@ -41,22 +37,27 @@ class I_ComplexSelectionTests: XCTestCase {
     func testdiscountOneInstanceOfOffer(){
         offerApplies()
         //1849 + 1799 + 499 + 499 + 400 + 349 = 5395 so discount 3296
-        let items = [P.meatPizza, P.veggiePizza, P.doughBalls, P.doughBalls, P.garlicBread, P.cookies]
-        XCTAssertEqual(offer.discountFrom(items), 3296)
+        var items = [P.meatPizza, P.veggiePizza, P.doughBalls, P.doughBalls, P.garlicBread, P.cookies]
+        XCTAssertEqual(offer.discount(for:items), 3296)
+        
+        items.append(contentsOf: [P.veggiePizza, P.veggiePizza, P.doughBalls, P.doughBalls])//extra pizza and sides,
+        XCTAssertEqual(offer.discount(for:items), 3296)
     }
+    
+    
     
     func testdiscountTwoInstancesOfOffer(){
         offerApplies()
         //1849 + 1799 + 499 + 499 + 400 + 349 = 5395 so discount 3296 (twice)
         var items = [P.meatPizza, P.veggiePizza, P.doughBalls, P.doughBalls, P.garlicBread, P.cookies, P.meatPizza, P.veggiePizza, P.doughBalls, P.doughBalls, P.garlicBread, P.cookies]
-        XCTAssertEqual(offer.discountFrom(items), 6592)
+        XCTAssertEqual(offer.discount(for:items), 6592)
         
         //add meat pizza (cheapest veg disregarded, so discount raised by 50p)
         items.append(P.meatPizza)
-        XCTAssertEqual(offer.discountFrom(items), 6642)
-        
+        XCTAssertEqual(offer.discount(for:items), 6642)
     }
     
+
     
 }
 
