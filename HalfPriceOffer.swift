@@ -23,19 +23,29 @@ class HalfPriceOffer : DiscountedPriceOffer {
         
     }
     
+    
+    
+    
+    
+    
     func discount(for purchases: [Product]) -> Int {
         
-        var total:Double = 0
+        var discountApplyed = 0
         
-        
-        for item in purchases{
-            let price = item.price
-            total = price -= Int(discountPercentage)
-            
-                //redcue is suppoed to add up the total. I thinbk im going wrong by not finding the total of the right items
+        for items in purchases{
+            if productIds.contains(items.id) {
+                discountApplyed += Int(Double(items.price) * discountPercentage)
+                
+                 
+            }
             
         }
         
-        return Int(total)
+
+        return discountApplyed
+        
     }
+    
+    
+    
 }
