@@ -13,6 +13,24 @@ class ThreeMeatsForTenPoundOffer : CappedOffer{
         productQuantity = 3
     }
     
+    
+    
+    func totalOverTenPounds(products: [Product]) -> Int {
+        var total = 0
+        let sorted = products.sorted(by: {$0.price > $1.price })
+        var coun = 0
+        for product in sorted{
+            if productIds.contains(product.id){
+            coun += 1
+            total += product.price
+            if coun >=   productQuantity {
+                break
+                }
+            }
+        }
+        return total
+    }
+    
     func timesIdAppearsInProductList(products: [Product]) -> Int {
               var count = 0
               for product in products {
@@ -22,29 +40,43 @@ class ThreeMeatsForTenPoundOffer : CappedOffer{
               }
               return count
           }
+       
     
-    func totalOverTenPounds(products: [Product]) -> Int {
-        var total = 0
-        for product in products{
-            if productIds.contains(product.price){
-                 total += Int(Double(product.price) >= maxPrice
-        }
-        }
-        
-        
-        return 0
-    }
         
     func applies(to purchases: [Product]) -> Bool {
-        
-        let count = timesIdAppearsInProductList(products: purchases)
-        
-            return  count >= 3
-        
+      let count = timesIdAppearsInProductList(products: purchases)
+        let total = totalOverTenPounds(products: (purchases))
+       
+        return count >= productQuantity && total >= maxPrice
     }
+       
+
     
     func discount(for purchases: [Product]) -> Int {
-        return 0
+        
+        var discount = 0
+        var purchasesOnOffer = purchases.filter() { productIds.contains($0.id) }
+        purchasesOnOffer.sort(by: {$0.price > $1.price })
+        
+        while purchasesOnOffer.count >= productQuantity{
+            var totalPrice = 0
+            
+            
+            for _ in 0..<productQuantity{
+                let item = purchasesOnOffer.remove(at: 0)
+                totalPrice += item.price
+            }
+           
+            if totalPrice > maxPrice{
+                discount += totalPrice - maxPrice
+            }else{
+                break
+            }
+        }
+        return discount
     }
 }
-//sort by price order then have it go though the list and make every 3rd item free if the total of the 3 items is over 10 quid.
+
+
+
+
